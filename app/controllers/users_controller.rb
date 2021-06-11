@@ -4,14 +4,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = user.new(user_params)
+    @user = User.new(user_params)
     @user.save
     redirect_to root_path
   end
 
   def index
     @user = User.new
-    @user = User.all
+    @users = User.all
   end
 
   def edit
