@@ -29,6 +29,14 @@
 	  <th>introduction</th>
 	  <th><%= current_user.introduction %></th>
   </tr>
+  <tr>
+	  <th>follows</th>
+	  <th><%= link_to current_user.followings.count, user_followings_path(current_user) %></th>
+  </tr>
+  <tr>
+	  <th>followers</th>
+	  <th><%= link_to current_user.followers.count, user_followers_path(current_user) %></th>
+  </tr>
 </tbody>
 </table>
 
