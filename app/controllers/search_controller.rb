@@ -1,4 +1,8 @@
 class SearchController < ApplicationController
+ def search
+  @books = Book.all
+  @users = User.all
+ end
 
  def search
    @range = params[:range]
