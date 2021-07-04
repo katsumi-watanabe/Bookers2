@@ -1,3 +1,2 @@
-$("textarea").val("");
-$("input").val("");
-$(".new-comment").html("<%= j(render partial: 'post_comment', locals: { book: @book, post_comment: @post_comment }) %>");
+$("#comments_area").html("<%= j(render 'post_comment', locals: { book: @book }) %>")
+$("#text-filed").val('')
