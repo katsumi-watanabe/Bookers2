@@ -69,27 +69,12 @@
       </tbody>
       </table>
 
-      <div class="flex-column">
-
-        <% @book.post_comments.each do |post_comment|%>
-        <div class="form-inline" >
-          <p><%= attachment_image_tag @user, :profile_image, size: "50x50", format: 'jpeg',fallback: "no_image.jpg" %><br>
-          <%= link_to @user.name, user_path(@user)%></p>
-          <%= post_comment.comment %>
-          <% if post_comment.user ==  current_user %>
-          <div class="comment-delete">
-          <%= link_to "Destroy",book_post_comment_path(post_comment.book, post_comment), class: "btn btn-sm btn-danger",method: :delete %>
-          </div>
-          <% end %>
-        </div>
-        <% end %>
+      <div id="comments_area">
+        <%= render partial: 'post_comments/post_comment', locals: { book: @book } %>
 
       </div>
       <div class="new-comment">
-        <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-          <%= f.text_area :comment, rows:'5', class: "form-control" %></br>
-          <%= f.submit "送信" %>
-        <% end %>
+        <%= render partial: 'post_comments/form', locals: { book: @book, post_comment: @post_comment } %>
         </div>
     </div>
 

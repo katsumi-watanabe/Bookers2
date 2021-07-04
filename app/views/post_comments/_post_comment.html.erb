@@ -1,0 +1,12 @@
+<% @book.post_comments.each do |post_comment|%>
+<div id ="book_<% post_comment.id %>" class="form-inline" >
+  <p><%= attachment_image_tag post_comment.user, :profile_image, size: "50x50", format: 'jpeg',fallback: "no_image.jpg" %><br>
+  <%= link_to post_comment.user.name, user_path(post_comment.user)%></p>
+  <%= post_comment.comment %>
+  <% if post_comment.user ==  current_user %>
+  <div class="comment-delete">
+  <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), class: "btn btn-sm btn-danger",method: :delete, remote: true %>
+  </div>
+  <% end %>
+</div>
+<% end %>
