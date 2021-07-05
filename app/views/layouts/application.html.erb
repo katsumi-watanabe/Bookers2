@@ -43,15 +43,17 @@
   <p id="notice">
   <%= flash[:notice] %>
   </p>
-  <div class="text-center ml-5">
-  <% if user_signed_in? %>
-    <%= form_with url: search_path, method: :get, local: :true do |f| %>
-      <%= f.text_field :word %>
-      <%= f.select :range, options_for_select([['User'], ['Book']]) %>
-      <%= f.select :search, options_for_select([["perfect","perfect_match"], ["partial","partial_match"], ["forward","forward_match"], ["backward","backward_match"]]) %>
-      <%= f.submit "search" %>
-    <% end %>
-  <% end %>
+  <div class="text-right">
+    <div class="container px-5 px-sm-0">
+      <% if user_signed_in? %>
+        <%= form_with url: search_path, method: :get, local: :true do |f| %>
+          <%= f.text_field :word %>
+          <%= f.select :range, options_for_select([['User'], ['Book']]) %>
+          <%= f.select :search, options_for_select([["perfect","perfect_match"], ["partial","partial_match"], ["forward","forward_match"], ["backward","backward_match"]]) %>
+          <%= f.submit "search" %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
     <%= yield %>
 </main>
