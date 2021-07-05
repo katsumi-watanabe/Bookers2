@@ -53,17 +53,33 @@
           </td>
           <td><%= link_to @book.title, book_path %></td>
           <td><%= @book.body %></td>
-          <% if @book.user == current_user %>
-          <td><%= link_to"Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
-          <td><%= link_to"Destroy", book_path(@book.id), method: :delete  , class: "btn btn-sm btn-danger", data: {confirm: "本当に消しますか？"} %></td>
-          <% end %>
-
           <td id = "books_buttons_<%= @book.id %>">
             <%= render partial: 'favorites/favorite-btn', locals: { book: @book } %>
           </td>
           <td id = "comment_count_<%= @book.id %>">
             comment：<%= @book.post_comments.count %>
           </td>
+          <td>
+            <div class="relative-post-evaluation">
+              <span id="star-rate-<%= @book.id %>"></span>
+              <script>
+                $('#star-rate-<%= @book.id %>').raty({
+                  size: 36,
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  readOnly: true,
+                  score: <%= @book.evaluation %>,
+                });
+              </script>
+            </div>
+          </td>
+
+          <% if @book.user == current_user %>
+          <td><%= link_to"Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
+          <td><%= link_to"Destroy", book_path(@book.id), method: :delete  , class: "btn btn-sm btn-danger", data: {confirm: "本当に消しますか？"} %></td>
+          <% end %>
         </tr>
       </tbody>
       </table>
