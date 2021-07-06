@@ -54,6 +54,7 @@
     <%= f.hidden_field :evaluation, id: :review_star %>
 
     <script>
+    $('#star<%= @book.id %>').empty();
     $('#star').raty({
       size     : 36,
       starOff:  '<%= asset_path('star-off.png') %>',

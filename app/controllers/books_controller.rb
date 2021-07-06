@@ -20,8 +20,14 @@ class BooksController < ApplicationController
   end
 
   def index
-    @book = Book.new
     @books = Book.all
+    if params[:sort_update]
+      @books = Book.latest
+    end
+    if params[:evaluation]
+      @books = Book.fresh
+    end
+    @book = Book.new
     @user = current_user
   end
 
