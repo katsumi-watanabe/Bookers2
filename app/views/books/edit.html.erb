@@ -25,8 +25,9 @@
     <label for="book_opinion">Opinion</label>
     <%= f.text_area :body, class: "form-control book_body" %>
   </div>
+    <%= render 'books/star' %>
   <div class="form-group">
-    <%= f.submit "Update Book", class: "btn btn-success" %>
+    <%= f.submit "Update Book", class: "btn btn-success mt-3" %>
   </div>
     <%= link_to"Show", book_path %>
     |

@@ -34,6 +34,21 @@
     <label for="book_opinion">Opinion</label>
     <%= f.text_area :body, class: "form-control book_body" %>
   </div>
+  <div class="mb-3" id="star">
+    <%= f.label :evaluation, "Rate" %>
+    <%= f.hidden_field :evaluation, id: :review_star %>
+
+    <script>
+    $('#star').raty({
+      size     : 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      scoreName: 'book[evaluation]',
+      half: true,
+    });
+    </script>
+  </div>
   <div class="form-group">
     <%= f.submit 'Create Book', class: "btn btn-success" %>
   </div>
@@ -60,22 +75,8 @@
             comment：<%= @book.post_comments.count %>
           </td>
           <td>
-            <div class="relative-post-evaluation">
-              <span id="star-rate-<%= @book.id %>"></span>
-              <script>
-                $('#star-rate-<%= @book.id %>').raty({
-                  size: 36,
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starHalf: "<%= asset_path('star-half.png') %>",
-                  half: true,
-                  readOnly: true,
-                  score: <%= @book.evaluation %>,
-                });
-              </script>
-            </div>
+            <%= render 'books/star' %>
           </td>
-
           <% if @book.user == current_user %>
           <td><%= link_to"Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
           <td><%= link_to"Destroy", book_path(@book.id), method: :delete  , class: "btn btn-sm btn-danger", data: {confirm: "本当に消しますか？"} %></td>

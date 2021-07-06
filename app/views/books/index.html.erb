@@ -11,6 +11,7 @@
       <th>Opinion</th>
       <th></th>
       <th>comment</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +28,23 @@
           <%= render partial: 'favorites/favorite-btn', locals: { book: book } %>
         </td>
         <td><%= book.post_comments.count %></td>
+        <td>
+          <div class="relative-post-evaluation">
+
+            <span id="star-rate-<%= book.id %>"></span>
+            <script>
+              $('#star-rate-<%= book.id %>').raty({
+                size: 36,
+                starOff: "<%= asset_path('star-off.png') %>",
+                starOn: "<%= asset_path('star-on.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                half: true,
+                readOnly: true,
+                score: '<%= book.evaluation %>',
+              });
+            </script>
+          </div>
+          </td>
       </tr>
     <% end %>
   </tbody>
