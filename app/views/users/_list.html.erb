@@ -54,6 +54,11 @@
     <%= f.text_area :body, class: "form-control book_body" %>
   </div>
 
+  <div class="form-group">
+    <label for="book_opinion">Category</label>
+     <%= f.text_field :category,class: "form-control book_category" %>
+  </div>
+
   <div class="mb-3" id="star">
     <%= f.label :evaluation, "Rate" %>
     <%= f.hidden_field :evaluation, id: :review_star %>

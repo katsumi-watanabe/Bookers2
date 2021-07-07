@@ -32,6 +32,14 @@
           <li><span class="fas fa-user-plus nav-link text-light"></span><%= link_to"sign up", new_user_registration_path %></li>
           <li><span class="fas fa-sign-in-alt nav-link text-light"></span><%= link_to"login", user_session_path %></li>
           <% end %>
+          <li>
+            <% if user_signed_in? %>
+              <%= form_with url: search_path, method: :get, local: :true do |f| %>
+                <%= f.text_field :word, class: "ml-3" %>
+                <%= f.submit "search" %>
+              <% end %>
+            <% end %>
+          </li>
         </ul>
 
       </div>
@@ -45,14 +53,6 @@
   </p>
   <div class="text-right">
     <div class="container px-5 px-sm-0">
-      <% if user_signed_in? %>
-        <%= form_with url: search_path, method: :get, local: :true do |f| %>
-          <%= f.text_field :word %>
-          <%= f.select :range, options_for_select([['User'], ['Book']]) %>
-          <%= f.select :search, options_for_select([["perfect","perfect_match"], ["partial","partial_match"], ["forward","forward_match"], ["backward","backward_match"]]) %>
-          <%= f.submit "search" %>
-        <% end %>
-      <% end %>
     </div>
   </div>
     <%= yield %>
