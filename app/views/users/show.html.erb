@@ -101,6 +101,69 @@
     <% end %>
   </tbody>
   </table>
+
+  <div>
+    <h3>投稿数の前日比・前週比</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>今日の投稿数</th>
+          <th>前日の投稿数</th>
+          <th>前日比</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% @user_today = @user.books.where(created_at: Time.zone.now.all_day).count %>
+            <%= @user.books.where(created_at: Time.zone.now.all_day).count %>
+          </td>
+          <td>
+            <% @user_yesterday = @user.books.where(created_at: 1.day.ago.all_day).count %>
+            <%= @user.books.where(created_at: 1.day.ago.all_day).count %>
+            </td>
+          <td>
+            <% if @user_yesterday == 0 %>
+              投稿が0のため計算できません
+            <% else %>
+              <% @user_book_day = @user_today / @user_yesterday %>
+              <%= (@user_book_day.to_d * 100).round %>%
+            <% end %>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>今週の投稿数</th>
+          <th>前週の投稿数</th>
+          <th>前週比</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% @user_week = @user.books.where(created_at: Time.zone.now.all_week).count %>
+            <%= @user.books.where(created_at: Time.zone.now.all_week).count %>
+            </td>
+          <td>
+            <% @user_last_week = @user.books.where(created_at: 1.day.ago.all_week).count %>
+            <%= @user.books.where(created_at: 1.day.ago.all_week).count %>
+            </td>
+          <td>
+            <% if @user_last_week == 0 %>
+              投稿が0のため計算できません
+            <% else %>
+              <% @user_book_week = @user_week / @user_last_week %>
+              <%= (@user_book_week.to_d * 100).round %>%
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   </div>
   </div>
 </div>
