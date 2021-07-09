@@ -31,9 +31,9 @@
   <%= link_to"", edit_user_path(current_user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
   <% else %>
   <% if current_user.following?(@user) %>
-    <%= link_to "Unfollow", user_relationships_path(@user.id), class: "btn btn-info ml-3", method: :delete %>
+    <%= link_to "Unfollow", user_relationships_path(@user.id), class: "btn btn-info ml-3", method: :delete, remote: true %>
   <% else %>
-    <%= link_to "Follow", user_relationships_path(@user.id), class: "btn btn-success ml-3", method: :post %>
+    <%= link_to "Follow", user_relationships_path(@user.id), class: "btn btn-success ml-3", method: :post, remote: true %>
   <% end %>
   <% end %>
 </div>
@@ -229,7 +229,7 @@
       });
     });
   </script>
-  
+
     </div>
   </div>
 </div>
