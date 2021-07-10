@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
     if params[:sort_update]
       @books = Book.latest
     end
@@ -29,6 +29,10 @@ class BooksController < ApplicationController
     end
     @book = Book.new
     @user = current_user
+  end
+
+  def weekly_rank
+    @books = Book.joins(:favorites).where(favorites: { created_at:　0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:id).order("count(*) desc")
   end
 
   def edit
