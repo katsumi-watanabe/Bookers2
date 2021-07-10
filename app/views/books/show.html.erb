@@ -54,6 +54,7 @@
     });
     </script>
   </div>
+
   <div class="form-group">
     <%= f.submit 'Create Book', class: "btn btn-success" %>
   </div>
@@ -82,6 +83,7 @@
           </td>
           <td>
             <%= render 'books/star' %>
+            閲覧数:<%= @book.impressions_count %>
           </td>
           <% if @book.user == current_user %>
           <td><%= link_to"Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
@@ -97,7 +99,7 @@
       </div>
       <div class="new-comment">
         <%= render partial: 'post_comments/form', locals: { book: @book, post_comment: @post_comment } %>
-        </div>
+      </div>
     </div>
 
   </div>

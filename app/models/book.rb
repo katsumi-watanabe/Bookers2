@@ -31,4 +31,6 @@ class Book < ApplicationRecord
     where("category LIKE?","%#{words}%")
   end
 
+  is_impressionable counter_cache: true
+
 end
