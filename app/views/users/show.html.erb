@@ -22,21 +22,38 @@
 	  <th>followers</th>
 	  <th><%= link_to @user.followers.count, user_followers_path(@user) %></th>
   </tr>
+  <tr>
+    <th>
+      <% if current_user.id == @user.id %>
+          <%= link_to"", edit_user_path(current_user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
+        <% else %>
+          <% if current_user.following?(@user) %>
+            <%= link_to "Unfollow", user_relationships_path(@user.id), class: "btn btn-info ml-3", method: :delete, remote: true %>
+          <% else %>
+            <%= link_to "Follow", user_relationships_path(@user.id), class: "btn btn-success ml-3", method: :post, remote: true %>
+        <% end %>
+      <% end %>
+    </th>
+    <th>
+      <% unless @user.id == current_user.id %>
+        <% if (current_user.following? @user) && (@user.following? current_user)  %>
+        <% if @isRoom == true %>
+          <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary">chat</a>
+        <% else %>
+          <%= form_for @room do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "chat", class: "btn btn-primary user-show-chat"%>
+          <% end %>
+        <% end %>
+        <% end %>
+      <% end %>
+    </th>
+  </tr>
 </tbody>
 </table>
 
-
-<div class="row">
-  <% if current_user.id == @user.id %>
-  <%= link_to"", edit_user_path(current_user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
-  <% else %>
-  <% if current_user.following?(@user) %>
-    <%= link_to "Unfollow", user_relationships_path(@user.id), class: "btn btn-info ml-3", method: :delete, remote: true %>
-  <% else %>
-    <%= link_to "Follow", user_relationships_path(@user.id), class: "btn btn-success ml-3", method: :post, remote: true %>
-  <% end %>
-  <% end %>
-</div>
 
   <h2 class="mt-3">New book</h2>
 
