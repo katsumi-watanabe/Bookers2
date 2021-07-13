@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
   has_many :followings, through: :relationships, source: :followed
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   attachment :profile_image
 
@@ -31,5 +33,6 @@ class User < ApplicationRecord
   def self.search(word)
     where("name LIKE?","%#{words}%")
   end
+  
 
 end
