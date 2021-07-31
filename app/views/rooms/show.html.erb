@@ -20,16 +20,13 @@
         <% @messages.each do |m| %>
         <% if m.user != current_user %>
           <div class="chat-box">
-
-            <div class="chat-face">
-              <%#= image_tag m.user.attachment_image_tag, class:"user-image" %>
-            </div>
-            <div class="left-message"> <strong><%= m.content %></strong>
-              <%= m.created_at.strftime("%Y-%m-%d")%>
+            <div class="left-message mb-3">
+              <%= attachment_image_tag m.user, :profile_image, size: "40x40", format: 'jpeg',fallback: "no_image.jpg" %>
+              <strong><%= m.content %></strong>
             </div>
             <% else %>
-            <div class="right-message"> <strong><%= m.content %></strong> <br>
-              <%= m.created_at.strftime("%Y-%m-%d")%>
+            <div class="right-message mb-3"> <strong><%= m.content %></strong>
+            <%= attachment_image_tag current_user, :profile_image, size: "40x40", format: 'jpeg',fallback: "no_image.jpg" %>
             </div>
             <% end %>
         <% end %>
